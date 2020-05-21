@@ -46,10 +46,38 @@ all: build
 build: $(BINDIR)/$(BINNAME)
 
 $(BINDIR)/$(BINNAME): $(SRC)
-	GO111MODULE=on go build $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $(BINDIR)/$(BINNAME) ./cmd/ashhellwiggo
+	GO111MODULE=on go build $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LDFLAGS)' -o $(BINDIR)/$(BINNAME) cmd/ashhellwiggo/main.go
 
 # --- Test ---
+.PHONY: test
+test: build
+test: test-style
+test: test-unit
 
+.PHONY: test-unit
+test-unit:
+	@echo
+	@echo "Running unit tests"
+	GO111MODULE=on go test $(GOFLAGS) -run $(TESTS) $(PKG) $(TESTFLAGS)
+
+.PHONY: test-coverage
+test-coverage:
+	@echo
+	@echo "Running unit tests with coverage"
+	@ ./scripts/coverage.sh
+
+.PHONY: test-style
+test-style:
+	GO111MODULE=on golangci-lint run
+	@scripts/coverage.sh
+
+.PHONY: coverage
+coverage:
+	@scripts/coverage.sh
+
+.PHONY: format
+format: $(GOIMPORTS)
+	GO111MODULE=on go list -f '{{.Dir}}' ./... | xargs $(GOIMPORTS) -w 
 
 # --- Dependencies ---
 $(GOX):
