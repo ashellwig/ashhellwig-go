@@ -1,4 +1,11 @@
 {
+    // Shell
+    "[shellscript]": {
+        "files.eol": "\n",
+        "editor.formatOnSave": true
+    },
+    "shellformat.flag": "-ln bash -i 4 -bn -ci -sr",
+    // Go
     "[go]": {
         "editor.insertSpaces": false,
         "editor.formatOnSave": true

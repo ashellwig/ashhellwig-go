@@ -1,0 +1,9 @@
+<!ELEMENT Experience (company_name, start_date, end_date, job_title, job_summary, job_description, skills_required, detailed_achievements)>
+<!ELEMENT company_name (#PCDATA)>
+<!ELEMENT start_date (#PCDATA)>
+<!ELEMENT end_date (#PCDATA)>
+<!ELEMENT job_title (#PCDATA)>
+<!ELEMENT job_summary (#PCDATA)>
+<!ELEMENT job_description (#PCDATA)>
+<!ELEMENT skills_required (#PCDATA)>
+<!ELEMENT detailed_achievements (#PCDATA)>
